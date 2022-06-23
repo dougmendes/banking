@@ -2,12 +2,13 @@ package service
 
 import (
 	"banking/domain"
+	"banking/errs"
 )
 
-//CONNECT THE REQUEST COME FROM THE PRIMARY PORT(SERVICE) TO THE SECONDARY PORT(REPOSITORY)
+// CustomerService CONNECT THE REQUEST COME FROM THE PRIMARY PORT(SERVICE) TO THE SECONDARY PORT(REPOSITORY)
 type CustomerService interface {
 	GetAllCustomers() ([]domain.Customer, error)
-	GetCustomersById(string) (*domain.Customer, error)
+	GetCustomersById(string) (*domain.Customer, *errs.AppError)
 }
 type DefaultCustomerService struct {
 	repo domain.CustomerRepository
@@ -16,7 +17,7 @@ type DefaultCustomerService struct {
 func (s DefaultCustomerService) GetAllCustomers() ([]domain.Customer, error) {
 	return s.repo.FindAll()
 }
-func (s DefaultCustomerService) GetCustomersById(id string) (*domain.Customer, error) {
+func (s DefaultCustomerService) GetCustomersById(id string) (*domain.Customer, *errs.AppError) {
 	return s.repo.ById(id)
 }
 
