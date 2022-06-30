@@ -4,11 +4,11 @@ import "banking/errs"
 
 //DOMAIN OBJECT
 type Customer struct {
-	ID          int
+	ID          int `db:"customer_id"`
 	Name        string
 	City        string
 	Zipcode     string
-	DateofBirth string
+	DateofBirth string `db:"date_of_birth"`
 	Status      string
 }
 
